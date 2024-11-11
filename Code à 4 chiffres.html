@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #container {
+            text-align: center;
+        }
+        #codeInputContainer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .digit-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            border-radius: 5px;
+            padding: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .digit {
+            font-size: 24px;
+            margin: 5px 0;
+            width: 40px;
+            text-align: center;
+        }
+        .arrow {
+            font-size: 16px;
+            cursor: pointer;
+            user-select: none;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="codeInputContainer">
+        <div class="digit-box">
+            <span class="arrow" onclick="changeDigit('up', 1)">▲</span>
+            <div class="digit" id="digit1">0</div>
+            <span class="arrow" onclick="changeDigit('down', 1)">▼</span>
+        </div>
+        <div class="digit-box">
+            <span class="arrow" onclick="changeDigit('up', 2)">▲</span>
+            <div class="digit" id="digit2">0</div>
+            <span class="arrow" onclick="changeDigit('down', 2)">▼</span>
+        </div>
+        <div class="digit-box">
+            <span class="arrow" onclick="changeDigit('up', 3)">▲</span>
+            <div class="digit" id="digit3">0</div>
+            <span class="arrow" onclick="changeDigit('down', 3)">▼</span>
+        </div>
+        <div class="digit-box">
+            <span class="arrow" onclick="changeDigit('up', 4)">▲</span>
+            <div class="digit" id="digit4">0</div>
+            <span class="arrow" onclick="changeDigit('down', 4)">▼</span>
+        </div>
+    </div>
+    <br>
+    <button onclick="checkCode()">Vérifier</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+let digits = [0, 0, 0, 0];
+
+function changeDigit(direction, position) {
+    if(direction === 'up') {
+        digits[position - 1] = (digits[position - 1] + 1) % 10;
+    } else {
+        digits[position - 1] = (digits[position - 1] - 1 + 10) % 10;
+    }
+    document.getElementById('digit' + position).innerText = digits[position - 1];
+}
+
+function checkCode() {
+    var code = digits.join("");
+    var messageElement = document.getElementById('message');
+
+    if (code === "0202") {
+        messageElement.textContent = "Bien joué ! Vous pouvez prendre la carte 69.";
+        messageElement.style.color = "green";
+    } else {
+        messageElement.textContent = "Oh non ! le code est incorrect ! Vous perdez une minute.";
+        messageElement.style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>
